@@ -11,26 +11,28 @@ import java.util.Arrays;
 public class UniqueElement {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int index = Integer.parseInt(reader.readLine());
-        String[] array = (reader.readLine().split(" "));
-        reader.close();
-        int[] intArray = new int[index];
-        for (int i = 0; i < index - 1; i++) {
-            intArray[i] = Integer.parseInt(array[i]);
+       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+       int index = Integer.parseInt(reader.readLine());
+       String [] strings = reader.readLine().split(" ");
+       int [] nums = new int[index];
+        for (int i = 0; i < strings.length; i++) {
+            nums[i] = Integer.parseInt(strings[i]);
         }
-
-        int result = index;
-        for (int i = 0; i < index - 1; i++) {
-            Arrays.sort(intArray);
-            if (intArray[i] == intArray[i + 1]) {
-                result-=2;}
-
-            String stringResult = Integer.toString(result);
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-            writer.write(stringResult);
-            reader.close();
-            writer.close();
+        int count=0;
+        int result = strings.length;
+        for (int i = 0; i < strings.length-1; i++) {
+            if (nums[i]==nums[i+1]){
+                result-=2;
+                count++;
+            }
         }
+        if (count>1){
+            result+=1;
+        }
+        String stringResult = Integer.toString(result);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        writer.write(stringResult);
+        writer.close();
     }
 }
+
