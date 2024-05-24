@@ -3,7 +3,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 //https://coderun.yandex.ru/problem/median-out-of-three/solutions/10010066-4dcc-36c0-73e3-97d3c775dd59?currentPage=1&pageSize=10&rowNumber=1
 
@@ -42,18 +43,30 @@ public class InputOutput {
     writer.write(String.valueOf(sum));
 	*/
     public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String[] parts = reader.readLine().split(" ");
-        int[] arr = new int[parts.length];
-        for (int i = 0; i < parts.length; i++) {
-            arr[i] = Integer.parseInt(parts[i]);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int index = Integer.parseInt(reader.readLine());
+            String[] nums = reader.readLine().split(" ");
+            reader.close();
+            Set<Integer> set = new HashSet<>();
+            for (int i = 0; i < index; i++) {
+                set.add(Integer.parseInt(nums[i]));
+            }
+            int result;
+            int count;
+            count = nums.length - set.size();
+            if (count != 0 && count % 2 == 0) {
+                result = nums.length - count - count + 1;
+            } else if (count != 0 && count % 2 != 0) {
+                result = nums.length - count - count;
+            } else {
+                result = nums.length - count;
+            }
+            String stringResult = Integer.toString(result);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+            writer.write(stringResult);
+            writer.close();
         }
-        Arrays.sort(arr);
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-        String result = Integer.toString(arr[1]);
-        writer.write(result);
-        writer.flush();
-        reader.close();
-        writer.close();
     }
-}
+
+
+
