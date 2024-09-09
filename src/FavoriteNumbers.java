@@ -8,10 +8,23 @@ public class FavoriteNumbers {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String number = bufferedReader.readLine();
         String[] arr = number.split("");
-        double count = Double.valueOf(bufferedReader.readLine());
+        StringBuilder originalNumberString = new StringBuilder();
+        for (String s : arr) {
+            originalNumberString.append(s);
+        }
+        int originalNumber = Integer.parseInt(originalNumberString.toString());
+        System.out.println(originalNumber);
+        double count = Double.parseDouble(bufferedReader.readLine());
         bufferedReader.close();
         double favorite = 0;
         double un = 0;
+        String result1 = Arrays.toString(arr);
+        System.out.println(result1);
+
+        //  if(result1 % 5 == 0 || result1 % 6 == 0 || result1 % 10 == 0){
+        //     favorite=1;
+        //  }
+
         int a = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 1; j < arr.length; j++) {
@@ -35,18 +48,28 @@ public class FavoriteNumbers {
                 }
             }
         }
-        if (un==0){
-            un=1;
+        if (un == 0) {
+            un = 1;
         }
-        double res = favorite/un;
+        double res = 0;
+        for (int i = 0; i < count; i++) {
+                res += favorite / un;
+            if (originalNumber % 5 == 0 || originalNumber % 6 == 0 || originalNumber % 10 == 0) {
+                if (i > 0) {
+                    if (i % 2 == 0) {
+                        favorite--;
+                    } else {
+                        favorite++;
+                    }
+                }
+            }
+        }
+        double result = res / count;
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
-        String result = String.format("%.10f",res);
+
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.close();
     }
-
-
-
 }
 
 
