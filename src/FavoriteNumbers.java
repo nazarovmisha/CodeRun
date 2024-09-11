@@ -1,7 +1,7 @@
 //https://coderun.yandex.ru/problem/random-swaps?currentPage=1&groups=backend&pageSize=20&search=
 
 import java.io.*;
-import java.util.Arrays;
+
 
 public class FavoriteNumbers {
     public static void main(String[] args) throws IOException {
@@ -13,30 +13,23 @@ public class FavoriteNumbers {
             originalNumberString.append(s);
         }
         int originalNumber = Integer.parseInt(originalNumberString.toString());
-        System.out.println(originalNumber);
-        double count = Double.parseDouble(bufferedReader.readLine());
-        bufferedReader.close();
+        //   System.out.println(originalNumber);
         double favorite = 0;
         double un = 0;
-        String result1 = Arrays.toString(arr);
-        System.out.println(result1);
 
-        //  if(result1 % 5 == 0 || result1 % 6 == 0 || result1 % 10 == 0){
-        //     favorite=1;
-        //  }
-
-        int a = 0;
+        double count = Double.parseDouble(number);
+        int a;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 1; j < arr.length; j++) {
                 a = Integer.parseInt(arr[j]);
                 arr[j] = arr[i];
                 arr[i] = String.valueOf(a);
-                String str = "";
+                StringBuilder str = new StringBuilder();
                 for (String s : arr) {
-                    str += s;
+                    str.append(s);
                 }
-                System.out.println(str);
-                int result = Integer.parseInt(str);
+                //    System.out.println(str);
+                int result = Integer.parseInt(str.toString());
                 if (result % 5 == 0 || result % 6 == 0 || result % 10 == 0) {
                     if (i != j) {
                         favorite++;
@@ -53,13 +46,15 @@ public class FavoriteNumbers {
         }
         double res = 0;
         for (int i = 0; i < count; i++) {
-                res += favorite / un;
+            //   System.out.println("i = " + i);
+            res += favorite / un;
+            //    System.out.println(res);
             if (originalNumber % 5 == 0 || originalNumber % 6 == 0 || originalNumber % 10 == 0) {
                 if (i > 0) {
-                    if (i % 2 == 0) {
-                        favorite--;
-                    } else {
+                    if (i % 2 != 0) {
                         favorite++;
+                    } else {
+                        favorite--;
                     }
                 }
             }
