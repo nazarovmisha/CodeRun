@@ -1,7 +1,7 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
+
+//https://coderun.yandex.ru/problem/trading-ya-intern/solutions/10010066-f431-0fbd-b073-8f82d8a4ca99?currentPage=2&groups=backend&pageSize=20&search=
 
 public class LotsOfChairs {
     public static void main(String[] args) throws IOException {
@@ -9,18 +9,28 @@ public class LotsOfChairs {
         String byers = reader.readLine();
         String salePriceString = reader.readLine();
         String purchasePriceString = reader.readLine();
-
-        int [] numberOfTransactionsArray = new int[2];
-        for (int i = 0; i < byers.length(); i++) {
-
-        }
-        int numberOfTransactions = 0;
-        if (numberOfTransactionsArray[0] < numberOfTransactionsArray[1]) {
-            numberOfTransactions = numberOfTransactionsArray[0];
+        reader.close();
+        int[] sellersAndByers = Arrays.stream(byers.split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] salePrice = Arrays.stream(salePriceString.split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] purchasePrice = Arrays.stream(purchasePriceString.split(" ")).mapToInt(Integer::parseInt).toArray();
+        int sales;
+        if (sellersAndByers[0] < sellersAndByers[1]) {
+            sales = sellersAndByers[0];
         } else {
-            numberOfTransactions = numberOfTransactionsArray[1];
+            sales = sellersAndByers[1];
         }
-        int sale
-    }
+        Arrays.sort(salePrice);
+        Arrays.sort(purchasePrice);
+        long result = 0;
+        for (int i = 0, j = sales-1; i < sales; i++, j--) {
+            if ((purchasePrice[j] - salePrice[i]) > 0) {
+                result += (purchasePrice[j] - salePrice[i]);
+            }
+        }
+        String answer = String.valueOf(result);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        writer.write(answer);
+        writer.close();
     }
 }
+
